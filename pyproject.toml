@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "aws-message-attributes"
+dynamic = ["version"]
+description = "Encode and decode MessageAttributes for SNS and SQS"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+keywords = ["message", "aws", "sns", "sqs"]
+authors = [
+  { name = "Christian Hartung", email = "hartung@live.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/pyinsole/aws-message-attributes#readme"
+Issues = "https://github.com/pyinsole/aws-message-attributes/issues"
+Source = "https://github.com/pyinsole/aws-message-attributes"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/aws_message_attributes tests}"
+
+[tool.coverage.paths]
+aws_message_attributes = ["src/aws_message_attributes", "*/aws-message-attributes/src/aws_message_attributes"]
+tests = ["tests", "*/aws-message-attributes/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[tool.coverage.run]
+source_pkgs = ["aws_message_attributes", "tests"]
+branch = true
+parallel = true
+omit = []
